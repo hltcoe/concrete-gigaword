@@ -9,7 +9,7 @@
 
   <name>Concrete Gigaword</name>
   <description>Library providing utilities for converting English Gigaword v5 to the Concrete NLP data schema.</description>
-  <url>https://github.com/hltcoe/concrete-agiga</url>
+  <url>https://github.com/hltcoe/concrete-gigaword</url>
 
   <developers>
     <developer>
