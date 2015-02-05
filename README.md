@@ -32,4 +32,8 @@ while (iter.hasNext()) {
 
 Concretely Annotated Gigaword
 ---
-See `GIGAWORD.md` for instructions about how to reproduce the Concrete representation of English Gigaword v5, one of the data sets described in the publication `Concretely Annotated Corpora`. 
+See `GIGAWORD.md` for instructions about how to reproduce the Concrete representation of English Gigaword v5, one of the data sets described in the publication `Concretely Annotated Corpora`.
+
+License
+---
+Apache 2
