@@ -8,7 +8,7 @@ Maven dependency
 <dependency>
   <groupId>edu.jhu.hlt</groupId>
   <artifactId>concrete-gigaword</artifactId>
-  <version>4.2.1</version>
+  <version>4.3.1</version>
 </dependency>
 ```
 
