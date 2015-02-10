@@ -5,17 +5,20 @@
 
 package edu.jhu.hlt.concrete.gigaword.expt;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Reader;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+
+
 
 import org.apache.commons.lang3.time.StopWatch;
 import org.joda.time.Duration;
@@ -23,12 +26,16 @@ import org.joda.time.Minutes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
+
+import edu.jhu.hlt.acute.archivers.Archiver;
+import edu.jhu.hlt.acute.archivers.tar.TarArchiver;
 import edu.jhu.hlt.concrete.Communication;
 import edu.jhu.hlt.concrete.gigaword.ConcreteGigawordDocumentFactory;
 import edu.jhu.hlt.concrete.gigaword.GigawordConcreteConverter;
-import edu.jhu.hlt.concrete.serialization.CommunicationTarGzSerializer;
-import edu.jhu.hlt.concrete.serialization.TarGzCompactCommunicationSerializer;
+import edu.jhu.hlt.concrete.serialization.archiver.ArchivableCommunication;
 import edu.jhu.hlt.concrete.util.ConcreteException;
+
 
 /**
  *
@@ -132,9 +139,10 @@ public class ConvertGigawordDocuments {
 
       // Iterate over communications.
       Iterator<Communication> citer;
-      try {
+      try (OutputStream os = Files.newOutputStream(localOutPath);
+          BufferedOutputStream bos = new BufferedOutputStream(os);
+          Archiver archiver = new TarArchiver(bos);) {
         citer = new ConcreteGigawordDocumentFactory().iterator(lp);
-        Set<Communication> comms = new HashSet<>();
         while (citer.hasNext()) {
           Communication c = citer.next();
           String cId = c.getId();
@@ -159,11 +167,9 @@ public class ConvertGigawordDocuments {
               c.setId(newId);
           }
 
-          comms.add(c);
+          archiver.addEntry(new ArchivableCommunication(c));
         }
-
-        CommunicationTarGzSerializer ser = new TarGzCompactCommunicationSerializer();
-        ser.toTar(comms, localOutPath);
+        
         logger.info("Finished path: {}", pathStr);
       } catch (ConcreteException ex) {
         logger.error("Caught ConcreteException during Concrete mapping.", ex);
