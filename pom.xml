@@ -4,7 +4,7 @@
 
   <groupId>edu.jhu.hlt</groupId>
   <artifactId>concrete-gigaword</artifactId>
-  <version>4.2.1</version>
+  <version>4.3.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>Concrete Gigaword</name>
@@ -23,7 +23,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <concrete.version>4.2.4</concrete.version>
+    <concrete.version>4.3.1</concrete.version>
   </properties>
 
   <scm>
@@ -160,11 +160,6 @@
       <scope>test</scope>
     </dependency>
 
-    <dependency>
-      <groupId>edu.jhu.hlt</groupId>
-      <artifactId>concrete-core</artifactId>
-      <version>${concrete.version}</version>
-    </dependency>
     <dependency>
       <groupId>edu.jhu.hlt</groupId>
       <artifactId>concrete-util</artifactId>
