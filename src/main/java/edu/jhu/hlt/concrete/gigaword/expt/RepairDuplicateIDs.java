@@ -30,7 +30,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * The Gigaword corpus contains a number of documents with duplicated IDs. This class
+ * provides utilities for mapping those IDs into a truly unique ID, so that each 
+ * Gigaword document has a unique identifier. 
  */
 public class RepairDuplicateIDs {
 

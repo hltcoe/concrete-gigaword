@@ -21,6 +21,9 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.zip.GZIPInputStream;
 
+/**
+ * Class that contains utilities for dealing with the Gigaword corpus.
+ */
 public class ExperimentUtils {
 
   private ExperimentUtils() {

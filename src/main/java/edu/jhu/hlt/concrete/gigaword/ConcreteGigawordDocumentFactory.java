@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2014 Johns Hopkins University HLTCOE. All rights reserved.
+ * Copyright 2012-2015 Johns Hopkins University HLTCOE. All rights reserved.
  * See LICENSE in the project root directory.
  */
 package edu.jhu.hlt.concrete.gigaword;
@@ -13,18 +13,17 @@ import edu.jhu.hlt.concrete.AnnotationMetadata;
 import edu.jhu.hlt.concrete.Communication;
 import edu.jhu.hlt.concrete.Section;
 import edu.jhu.hlt.concrete.util.ConcreteException;
-import edu.jhu.hlt.concrete.util.ConcreteUUIDFactory;
+import edu.jhu.hlt.concrete.uuid.UUIDFactory;
 import gigaword.api.GigawordDocumentConverter;
 import gigaword.interfaces.GigawordDocument;
 import gigaword.interfaces.TextSpan;
 
 /**
- * @author max
- *
+ * Class that is capable of converting {@link GigawordDocument} objects to Concrete
+ * {@link Communication} objects. Additionally, can stream Communication objects
+ * from a {@link Path} that points to a .gz file from the Gigaword corpus.
  */
 public class ConcreteGigawordDocumentFactory {
-
-  private final ConcreteUUIDFactory idf = new ConcreteUUIDFactory();
 
   /**
    * Get the {@link AnnotationMetadata} for the {@link ConcreteGigawordDocumentFactory} class.
@@ -44,10 +43,10 @@ public class ConcreteGigawordDocumentFactory {
 
   public Communication convert(GigawordDocument gd) throws ConcreteException {
     Communication c = new Communication()
-      .setUuid(this.idf.getConcreteUUID())
+      .setUuid(UUIDFactory.newUUID())
       .setId(gd.getId())
       .setStartTime(gd.getMillis() / 1000)
-      .setType(gd.getType())
+      .setType(gd.getType().toString())
       .setText(gd.getText())
       .setMetadata(getMetadata());
 
@@ -55,7 +54,7 @@ public class ConcreteGigawordDocumentFactory {
     int nCtr = 0;
     for (TextSpan ts : gd.getTextSpans()) {
       Section s = new Section()
-        .setUuid(this.idf.getConcreteUUID())
+        .setUuid(UUIDFactory.newUUID())
         .setKind("Passage")
         .setTextSpan(new edu.jhu.hlt.concrete.TextSpan(ts.getStart(), ts.getEnding()));
       s.addToNumberList(nCtr);
