@@ -1,3 +1,12 @@
+Deprecated
+===
+This library has been deprecated. Please see
+[this page](https://github.com/hltcoe/concrete-java/tree/master/ingesters/gigaword)
+for information about the latest Concrete Gigaword ingester.
+
+If starting a project using Concrete and Gigaword, please use the above link
+to the main concrete-java project.
+
 Concrete Gigaword
 ====
 Library to take Gigaword documents and convert them to Concrete `Communication` objects.
